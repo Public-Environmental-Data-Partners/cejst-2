@@ -1,3 +1,5 @@
+This repo contains the code, processes, and documentation for CEJST v2, forked and maintained by the [Public Environmental Data Partners](https://screening-tools.com/).
+
 # CEJST Tool
 
 [![CC0 License](https://img.shields.io/badge/license-CCO--1.0-brightgreen)](https://github.com/DOI-DO/j40-cejst-2/blob/main/LICENSE.md)
