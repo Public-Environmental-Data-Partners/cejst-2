@@ -1,35 +1,35 @@
-name: Ping Check
-on:
-  # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
-  schedule:
-    # Run every five minutes
-    - cron: '*/5 * * * *'
-  # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Ping Check'
-jobs:
-  check_site_uptime:
-    runs-on: ubuntu-latest
-    environment: Staging
-    name: Ping the site
-    steps:
-    - name: Check the site
-      id: ping
-      uses: Jtalk/url-health-check-action@v4
-      with:
-        url: ${{ secrets.SITE_URL }}
-    - name: Failure Notification
-      uses: ravsamhq/notify-slack-action@2.5.0
-      if:  ${{ failure() }}
-      with:
-        status: ${{ job.status }}
-        notification_title: '{workflow} has {status_message}'
-        message_format: '{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>, ${{ secrets.SITE_URL }} may be down. ' 
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.J40_TOOL_MONITORING_SLACK_ALERTS }}
+# name: Ping Check
+# on:
+#   # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+#   schedule:
+#     # Run every five minutes
+#     # - cron: '*/5 * * * *'
+#   # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
+#   workflow_dispatch:
+#     inputs:
+#       logLevel:
+#         description: 'Log level'
+#         required: true
+#         default: 'warning'
+#       tags:
+#         description: 'Ping Check'
+# jobs:
+#   check_site_uptime:
+#     runs-on: ubuntu-latest
+#     environment: Staging
+#     name: Ping the site
+#     steps:
+#     - name: Check the site
+#       id: ping
+#       uses: Jtalk/url-health-check-action@v4
+#       with:
+#         url: ${{ secrets.SITE_URL }}
+#     - name: Failure Notification
+#       uses: ravsamhq/notify-slack-action@2.5.0
+#       if:  ${{ failure() }}
+#       with:
+#         status: ${{ job.status }}
+#         notification_title: '{workflow} has {status_message}'
+#         message_format: '{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>, ${{ secrets.SITE_URL }} may be down. ' 
+#       env:
+#         SLACK_WEBHOOK_URL: ${{ secrets.J40_TOOL_MONITORING_SLACK_ALERTS }}
